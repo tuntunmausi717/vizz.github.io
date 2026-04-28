@@ -6,7 +6,7 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# Groq client setup with model
+# Groq client setup
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 MODEL_NAME = "llama-3.3-70b-versatile"
 
@@ -16,7 +16,6 @@ def chat_endpoint():
     user_message = data.get('message', '')
     
     try:
-        # Groq API call with Hinglish bot personality
         chat_completion = client.chat.completions.create(
             messages=[
                 {
@@ -35,7 +34,7 @@ def chat_endpoint():
         return jsonify({'reply': reply})
         
     except Exception as e:
-        return jsonify({'reply': f'Kya mc error aa gaya: {str(e)}'})
+        return jsonify({'reply': f'Error: {str(e)}'})
 
 @app.route('/')
 def home():
