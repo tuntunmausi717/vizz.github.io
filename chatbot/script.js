@@ -1,13 +1,13 @@
 async function sendMessage() {
     const input = document.getElementById('user-input');
     const message = input.value.trim();
-    
+
     if (message === '') return;
-    
+
     // User ka message UI mein dikhao
     addMessage(message, 'user-message');
     input.value = '';
-    
+
     try {
         // Python backend ko message bhejo
         const response = await fetch('https://chatbot-k3vp.onrender.com/chat', {
@@ -17,9 +17,10 @@ async function sendMessage() {
             },
             body: JSON.stringify({ message: message })
         });
-        
+
         const data = await response.json();
         addMessage(data.reply, 'bot-message');
+
     } catch (error) {
         addMessage('Kya bhai error aa gaya: ' + error.message, 'bot-message');
     }
@@ -31,7 +32,7 @@ function addMessage(text, className) {
     messageDiv.classList.add('message', className);
     messageDiv.textContent = text;
     messagesDiv.appendChild(messageDiv);
-    
+
     // Auto scroll to bottom
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
