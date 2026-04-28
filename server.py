@@ -8,7 +8,8 @@ CORS(app)
 
 # Direct environment variable se uthao (no .env file needed)
 genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
-model = genai.GenerativeModel('gemini-1.5-flash')
+# Is line ko badal de
+model = genai.GenerativeModel('gemini-1.5-flash-latest')
 chat = model.start_chat(history=[])
 
 @app.route('/chat', methods=['POST'])
