@@ -21,7 +21,7 @@ async function sendMessage() {
         const data = await response.json();
         addMessage(data.reply, 'bot-message');
     } catch (error) {
-        addMessage('Kya mc error aa gaya: ' + error.message, 'bot-message');
+        addMessage('Kya bhai error aa gaya: ' + error.message, 'bot-message');
     }
 }
 
