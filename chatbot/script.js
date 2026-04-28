@@ -10,7 +10,7 @@ async function sendMessage() {
     
     try {
         // Python backend ko message bhejo
-        const response = await fetch('https://chatbot-r4z2.onrender.com', {
+        const response = await fetch('https://chatbot-r4z2.onrender.com/chat', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
