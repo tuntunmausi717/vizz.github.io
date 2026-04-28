@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Anuj Kumar | AI Developer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<style>
+body{
+background:#050505;
+color:white;
+font-family:Inter;
+overflow-x:hidden;
+cursor:none;
+}
+
+/* cursor */
+.cursor-dot,.cursor-outline{
+position:fixed;
+border-radius:50%;
+pointer-events:none;
+z-index:9999;
+}
+.cursor-dot{width:8px;height:8px;background:white;}
+.cursor-outline{width:40px;height:40px;border:1px solid white;}
+
+/* canvas */
+#canvas-container{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+}
+</style>
+</head>
+
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
+<div id="canvas-container"></div>
+
+<!-- HERO -->
+<section class="h-screen flex flex-col justify-center items-center text-center">
+<div class="mb-6">
+  <img src="profile.jpg" 
+       alt="Anuj Kumar" 
+       class="w-64 h-64 object-cover rounded-xl border border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:scale-105 transition duration-500">
+</div>
+  <h1 class="text-[12vw] font-black leading-none">
+<span id="first"></span><br>
+<span id="last"></span>
+</h1>
+
+<p class="mt-6 text-gray-400">Aspiring AI Developer</p>
+
+</section>
+
+<!-- ABOUT -->
+<section class="p-10 max-w-3xl mx-auto text-center">
+<h2 class="text-3xl font-bold mb-4">About Me</h2>
+
+<p class="text-gray-400">
+I am Anuj Kumar, a beginner AI developer currently learning and building projects. 
+I focus on improving my skills daily and exploring modern technologies.
+</p>
+</section>
+
+<!-- SKILLS -->
+<section class="p-10 text-center">
+<h2 class="text-3xl font-bold mb-6">Skills</h2>
+
+<div class="flex justify-center gap-6">
+
+<div class="bg-gray-800 px-6 py-4 rounded-lg">HTML</div>
+<div class="bg-gray-800 px-6 py-4 rounded-lg">Basic Python</div>
+
+</div>
+</section>
+
+<!-- PROJECT -->
+<section class="p-10 max-w-3xl mx-auto text-center">
+<h2 class="text-3xl font-bold mb-6">Projects</h2>
+
+<div class="bg-gray-900 p-6 rounded-lg">
+<h3 class="text-xl font-bold mb-2">AI Chatbot</h3>
+
+<p class="text-gray-400">
+A simple AI chatbot project built using APIs and basic logic.
+</p>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section class="p-10 text-center">
+<h2 class="text-3xl font-bold mb-4">Contact</h2>
+<p class="text-gray-400">kumaranuj879119@gmail.com</p>
+</section>
+
+<script>
+
+/* TYPEWRITER */
+gsap.to("#first",{text:"ANUJ",duration:1});
+gsap.to("#last",{text:"KUMAR",delay:1,duration:1});
+
+/* CURSOR */
+const dot=document.querySelector(".cursor-dot");
+const outline=document.querySelector(".cursor-outline");
+
+window.addEventListener("mousemove",(e)=>{
+dot.style.left=e.clientX+"px";
+dot.style.top=e.clientY+"px";
+
+gsap.to(outline,{
+x:e.clientX,
+y:e.clientY,
+duration:0.2
+});
+});
+
+/* THREE BACKGROUND */
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
+camera.position.z=30;
+
+const renderer=new THREE.WebGLRenderer({alpha:true});
+renderer.setSize(window.innerWidth,window.innerHeight);
+document.getElementById("canvas-container").appendChild(renderer.domElement);
+
+const geometry=new THREE.BufferGeometry();
+const count=1000;
+const pos=new Float32Array(count*3);
+
+for(let i=0;i<count*3;i++){
+pos[i]=(Math.random()-0.5)*100;
+}
+
+geometry.setAttribute("position",new THREE.BufferAttribute(pos,3));
+
+const material=new THREE.PointsMaterial({size:0.1,color:0xffffff});
+const mesh=new THREE.Points(geometry,material);
+scene.add(mesh);
+
+function animate(){
+requestAnimationFrame(animate);
+mesh.rotation.y+=0.001;
+renderer.render(scene,camera);
+}
+animate();
+
+</script>
+
+</body>
+</html>
