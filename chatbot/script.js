@@ -10,7 +10,7 @@ async function sendMessage() {
 
     try {
         // Python backend ko message bhejo
-        const response = await fetch('https://chatbot-k3vp.onrender.com/chat', {
+        const response = await fetch('https://chatbot-one-smoky-46.vercel.app/api/chat', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
