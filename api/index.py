@@ -9,7 +9,7 @@ CORS(app)
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 MODEL_NAME = "llama-3.3-70b-versatile"
 
-@app.route('/chat', methods=['POST'])
+@app.route('/api/chat', methods=['POST'])
 def chat_endpoint():
     data = request.json
     user_message = data.get('message', '')
